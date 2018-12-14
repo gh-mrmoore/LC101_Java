@@ -2,7 +2,10 @@ package org.launchcode.techjobs.console;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+
+import org.launchcode.techjobs.console.JobData;
 
 /**
  * Created by LaunchCode
@@ -11,7 +14,7 @@ public class TechJobs {
 
     private static Scanner in = new Scanner(System.in);
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
 
         // Initialize our field map with key/name pairs
         HashMap<String, String> columnChoices = new HashMap<>();
@@ -58,10 +61,12 @@ public class TechJobs {
 
                 // What is their search term?
                 System.out.println("\nSearch term: ");
-                String searchTerm = in.nextLine();
+                String searchTerm1 = in.nextLine();
+                String searchTerm = searchTerm1.toLowerCase();
 
                 if (searchField.equals("all")) {
-                    System.out.println("Search all fields not yet implemented.");
+                    // System.out.println("Search all fields not yet implemented.");
+                    printJobs(JobData.findByValue(searchTerm));
                 } else {
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
                 }
@@ -103,14 +108,29 @@ public class TechJobs {
                 validChoice = true;
             }
 
-        } while(!validChoice);
-
+        } while (!validChoice);
+        // System.out.println("Choices: " + choiceKeys[choiceIdx]);
         return choiceKeys[choiceIdx];
     }
 
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
 
-        System.out.println("printJobs is not implemented yet");
+        // System.out.println("Method variable: " + someJobs);
+
+        int j = 0;
+        int someJobs_size = someJobs.size();
+
+        while (j <= someJobs_size -1) {
+            int k = j + 1;
+            HashMap<String, String> singleSomeJobs = new HashMap<>(someJobs.get(j));
+            // System.out.println("Result " + k + " of " + someJobs_size);
+            System.out.println("^^^^^^ Result " + k + " of " + someJobs_size + "^^^^^^");
+            for (Map.Entry<String, String> oneJob : singleSomeJobs.entrySet()) {
+                System.out.println(oneJob.getKey() + ": " + oneJob.getValue());
+            }
+            System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
+            j++;
+        }
     }
 }

@@ -10,6 +10,10 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+
+import static com.sun.jmx.snmp.ThreadContext.contains;
 
 /**
  * Created by LaunchCode
@@ -74,7 +78,8 @@ public class JobData {
 
         for (HashMap<String, String> row : allJobs) {
 
-            String aValue = row.get(column);
+            String aValue1 = row.get(column);
+            String aValue = aValue1.toLowerCase();
 
             if (aValue.contains(value)) {
                 jobs.add(row);
@@ -82,6 +87,29 @@ public class JobData {
         }
 
         return jobs;
+    }
+
+    //search all fields for a given string input
+
+    public static ArrayList<HashMap<String, String>> findByValue(String search) {
+        // load data if it's not already
+        loadData();
+
+        // create the arraylist to store results to return to TechJobs
+        ArrayList<HashMap<String, String>> findjobs = new ArrayList();
+
+        // loop thru the arraylist getting the HashMap for each job
+        for (HashMap<String, String> jobrow : allJobs) {
+            // get the array of all the keys in the individual job entry HashMap
+            for (String selectColumns : jobrow.keySet()) {
+                String rowValues1 = jobrow.get(selectColumns);
+                String rowValues = rowValues1.toLowerCase();
+                if (rowValues.contains(search)) {
+                    findjobs.add(jobrow);
+                }
+            }
+        }
+        return findjobs;
     }
 
     /**
