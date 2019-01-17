@@ -31,21 +31,26 @@ public class SearchController {
                           @RequestParam String searchTerm) {
 
         if(searchType.equals("all")) {
-            System.out.println(searchType + " | " + searchTerm);
+            //System.out.println(searchType + " | " + searchTerm);
             ArrayList<HashMap<String, String>> results = JobData.findByValue(searchTerm);
-            System.out.println(results);
+            int size = results.size();
+            //System.out.println(results);
+            //System.out.println(size);
             model.addAttribute("columns", ListController.columnChoices);
             model.addAttribute("title", "All Jobs Search Results");
             model.addAttribute("results", results);
+            model.addAttribute("size", size);
             return "search";
         } else {
-            System.out.println(searchType + " | " + searchTerm);
+            //System.out.println(searchType + " | " + searchTerm);
             ArrayList<HashMap<String, String>> results = JobData.findByColumnAndValue(searchType, searchTerm);
-            System.out.println(results);
+            int size = results.size();
+            //System.out.println(results);
+            //System.out.println(size);
             model.addAttribute("columns", ListController.columnChoices);
             model.addAttribute("title", "Specific Search Results");
             model.addAttribute("results", results);
-
+            model.addAttribute("size", size);
             return "search";
         }
 
