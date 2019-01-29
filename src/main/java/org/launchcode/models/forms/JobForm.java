@@ -22,6 +22,29 @@ public class JobForm {
     @NotNull
     private int employerId;
 
+    //add string to pass location name(s) and the integer identifier for each one
+    @NotNull
+    @Size(min=1, message = "Location may not be empty")
+    private String location;
+
+    @NotNull
+    private int locationID;
+
+    //add string to pass position info and integer identifier for each one
+    @NotNull
+    @Size(min=1, message = "Position may not be empty")
+    private String position;
+
+    @NotNull
+    private int positionID;
+
+    @NotNull
+    @Size(min=1, message = "Core Competency, aka Skill, may not be empty")
+    private String skill;
+
+    @NotNull
+    private int skillID;
+
     /*
         TODO #3 - Included other fields needed to create a job,
         with correct validation attributes and display names.
@@ -42,7 +65,27 @@ public class JobForm {
         */
 
         employers = jobData.getEmployers().findAll();
+        //my additions below
+        locations = jobData.getLocations().findAll();
+        coreCompetencies = jobData.getCoreCompetencies().findAll();
+        positionTypes = jobData.getPositionTypes().findAll();
+        //my additions above
 
+    }
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public int getLocationID() {
+        return locationID;
+    }
+
+    public void setLocationID(int locationID) {
+        this.locationID = locationID;
     }
 
     public String getName() {
@@ -91,5 +134,37 @@ public class JobForm {
 
     public void setPositionTypes(ArrayList<PositionType> positionTypes) {
         this.positionTypes = positionTypes;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public int getPositionID() {
+        return positionID;
+    }
+
+    public void setPositionID(int positionID) {
+        this.positionID = positionID;
+    }
+
+    public String getSkill() {
+        return skill;
+    }
+
+    public void setSkill(String skill) {
+        this.skill = skill;
+    }
+
+    public int getSkillID() {
+        return skillID;
+    }
+
+    public void setSkillID(int skillID) {
+        this.skillID = skillID;
     }
 }
