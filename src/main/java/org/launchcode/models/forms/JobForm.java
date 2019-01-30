@@ -49,6 +49,7 @@ public class JobForm {
         TODO #3 - Included other fields needed to create a job,
         with correct validation attributes and display names.
         Don't forget to add getters and setters
+        DONE
      */
 
     private ArrayList<Employer> employers;
@@ -62,6 +63,7 @@ public class JobForm {
 
         /*
             TODO #4 - populate the other ArrayList collections needed in the view
+            DONE
         */
 
         employers = jobData.getEmployers().findAll();
