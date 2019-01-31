@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+    <nav th:replace="fragments :: navigation"></nav>
+
+    <h1>Categories</h1>
+    <hr/>
+    <p th:unless="${menus} and ${menus.size()}">no menus :(</p>
+
+    <ul>
+        <li th:each="menu : ${menus}"
+            th:text="${menu.name}"></li>
+    </ul>
+</body>
+</html>
