@@ -1,8 +1,6 @@
 package org.launchcode.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -24,7 +22,12 @@ public class Cheese {
     @Size(min=1, message = "Description must not be empty")
     private String description;
 
-    private CheeseType type;
+    //private CheeseType type;
+        //replacing with Category class
+
+
+    @ManyToOne
+    private Category category;
 
     public Cheese(String name, String description) {
         this.name = name;
@@ -53,6 +56,10 @@ public class Cheese {
         this.description = description;
     }
 
+    /*
+    commented out since use of array/enum is deprecated
+    category use is now function of Category model pulling from database
+
     public CheeseType getType() {
         return type;
     }
@@ -60,4 +67,14 @@ public class Cheese {
     public void setType(CheeseType type) {
         this.type = type;
     }
+    */
+    //new getter-setter pair for the class instantiation
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
 }
