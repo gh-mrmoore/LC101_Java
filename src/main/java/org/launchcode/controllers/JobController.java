@@ -2,6 +2,7 @@ package org.launchcode.controllers;
 
 import org.launchcode.models.Employer;
 import org.launchcode.models.Job;
+import org.launchcode.models.PositionType;
 import org.launchcode.models.forms.JobForm;
 import org.launchcode.models.data.JobData;
 import org.springframework.stereotype.Controller;
@@ -44,26 +45,56 @@ public class JobController {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String add(Model model, @ModelAttribute @Valid JobForm jobForm, Errors errors) {
+    public String add(Model model, @ModelAttribute @Valid JobForm newJobForm, Errors errors) {
 
         // TODO #6 - Validate the JobForm model, and if valid, create a
         // new Job and add it to the jobData data store. Then
         // redirect to the job detail view for the new Job.
+        //Employer thisNewEmployer = new Employer();
+        //PositionType thisNewPosition = new PositionType(jobData.findById(newJobForm.getPositionID()).getPositionType());
 
         if (errors.hasErrors()) {
-            return "redirect job/add";
+            /*
+            Job thisNewJob = new Job(newJobForm.getName(),
+                    jobData.findById(newJobForm.getEmployerId()).getEmployer(),
+                    jobData.findById(newJobForm.getLocationID()).getLocation(),
+                    jobData.findById(newJobForm.getPositionID()).getPositionType(),
+                    jobData.findById(newJobForm.getSkillID()).getCoreCompetency());
+            System.out.println(" ");
+            System.out.println(" ");
+            System.out.println("Job Form object passed in: " + newJobForm);
+            System.out.println(" ");
+            System.out.println(" ");
+            System.out.println(errors);
+            System.out.println(" ");
+            System.out.println("NEW JOB OBJECT FROM ERROR: " + thisNewJob);
+            System.out.println(" ");
+            System.out.println("NEW POSITION"  + thisNewJob.getPositionType());
+            System.out.println("POSITION FROM newJOBFORM " + jobData.findById(newJobForm.getPositionID()).getPositionType());
+            System.out.println(" ");
+            System.out.println("NEW SKILL " + thisNewJob.getCoreCompetency());
+            System.out.println("NEW LOCATION " + thisNewJob.getLocation());
+            System.out.println(" ");
+            System.out.println(" ");
+            */
+            model.addAttribute("title", "Fix Job Addition");
+            model.addAttribute("errors", errors);
+            model.addAttribute("thisjob", newJobForm);
+            return "new-job";
         } else {
-            String myNewJobName = jobForm.getName();
-            int myNewJobEmployer = jobForm.getEmployerId();
-            String myNewJobLocation = jobForm.getLocation();
 
-            Job myNewJob = new Job(jobForm);
+            //name, employer, location, positiontype, corecomp
+            Job thisNewJob = new Job(newJobForm.getName(),
+                                        jobData.findById(newJobForm.getEmployerId()).getEmployer(),
+                                        jobData.findById(newJobForm.getLocationID()).getLocation(),
+                                        jobData.findById(newJobForm.getPositionID()).getPositionType(),
+                                        jobData.findById(newJobForm.getSkillID()).getCoreCompetency());
+            //System.out.println("NEW JOB OBJECT: " + thisNewJob);
 
-            jobData.add(myNewJob);
+            jobData.add(thisNewJob);
 
-
-
-            return "redirect:/job-detail?id=1";
+            //return "list-jobs";
+            return "redirect:?id=" + thisNewJob.getId();
         }
     }
 }

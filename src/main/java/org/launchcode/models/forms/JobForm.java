@@ -16,34 +16,37 @@ import java.util.ArrayList;
 public class JobForm {
 
     @NotNull
-    @Size(min=1, message = "Name may not be empty")
+    @Size(min=3, message = "Name may not be empty")
     private String name;
 
     @NotNull
     private int employerId;
 
     //add string to pass location name(s) and the integer identifier for each one
-    @NotNull
-    @Size(min=1, message = "Location may not be empty")
-    private String location;
 
     @NotNull
     private int locationID;
-
-    //add string to pass position info and integer identifier for each one
-    @NotNull
-    @Size(min=1, message = "Position may not be empty")
-    private String position;
 
     @NotNull
     private int positionID;
 
     @NotNull
-    @Size(min=1, message = "Core Competency, aka Skill, may not be empty")
-    private String skill;
+    private int skillID;
+
+    /*
+    @NotNull
+    @Size(min=1, message = "Location may not be empty")
+    private String location;
 
     @NotNull
-    private int skillID;
+    @Size(min=1, message = "Position may not be empty")
+    private String position;
+
+    @NotNull
+    @Size(min=1, message = "Core Competency, aka Skill, may not be empty")
+    private String skill;
+    */
+
 
     /*
         TODO #3 - Included other fields needed to create a job,
@@ -74,13 +77,8 @@ public class JobForm {
         //my additions above
 
     }
-    public String getLocation() {
-        return location;
-    }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
+
 
     public int getLocationID() {
         return locationID;
@@ -138,14 +136,6 @@ public class JobForm {
         this.positionTypes = positionTypes;
     }
 
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
     public int getPositionID() {
         return positionID;
     }
@@ -153,14 +143,27 @@ public class JobForm {
     public void setPositionID(int positionID) {
         this.positionID = positionID;
     }
-
+    /*
+    public void setPosition(String position) {
+        this.position = position;
+    }
     public String getSkill() {
         return skill;
     }
-
     public void setSkill(String skill) {
         this.skill = skill;
     }
+    public String getPosition() {
+        return position;
+    }
+    public String getLocation() {
+        return location;
+    }
+    public void setLocation(String location) {
+        this.location = location;
+    }
+    */
+
 
     public int getSkillID() {
         return skillID;
@@ -169,4 +172,10 @@ public class JobForm {
     public void setSkillID(int skillID) {
         this.skillID = skillID;
     }
+
+    @Override
+    public String toString() {
+        return name + " " + employerId + " Loc: " + locationID + " posType: " + positionID + " skill: " + skillID;
+    }
+
 }
