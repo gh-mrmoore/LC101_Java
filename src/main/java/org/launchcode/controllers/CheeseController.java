@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Created by LaunchCode
@@ -32,9 +33,8 @@ public class CheeseController {
     // Request path: /cheese
     @RequestMapping(value = "")
     public String index(Model model) {
-
+        model.addAttribute("title", "My Cheeses - Home");
         model.addAttribute("cheeses", cheeseDao.findAll());
-        model.addAttribute("title", "My Cheeses");
 
         return "cheese/index";
     }
@@ -81,6 +81,17 @@ public class CheeseController {
         }
 
         return "redirect:";
+    }
+
+    @RequestMapping(value = "category", method = RequestMethod.GET)
+    public String displayCheeseByCategory(Model model, @RequestParam int id) {
+        Category thisCat = categoryDao.findOne(id);
+        List<Cheese> cheeses = thisCat.getCheeses();
+
+        model.addAttribute("title", "Cheeses in Category: " + thisCat.getName());
+        model.addAttribute("cheeses", cheeses);
+
+        return "cheese/index";
     }
 
 }

@@ -7,18 +7,18 @@ import javax.validation.constraints.NotNull;
 
 public class AddMenuItemForm {
     @NotNull
-    private Menu menu;
-
-    @NotNull
-    private Iterable<Cheese> cheeses;
-
-    @NotNull
     private int menuId;
 
     @NotNull
     private int cheeseId;
 
+    private Menu menu;
+
+    private Iterable<Cheese> cheeses;
+
+
     //getters, aka accessors
+
     public Menu getMenu() {
         return menu;
     }
@@ -37,5 +37,9 @@ public class AddMenuItemForm {
     public AddMenuItemForm(Menu menu, Iterable<Cheese> cheeses) {
         this.menu = menu;
         this.cheeses = cheeses;
+    }
+    @Override
+    public String toString() {
+        return "MENU-ID: " + menuId + " CHEESE-ID " + cheeseId + " MENU " + menu + " CHEESES: " + cheeses;
     }
 }

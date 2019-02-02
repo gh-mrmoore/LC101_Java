@@ -26,7 +26,6 @@ public class Cheese {
     //private CheeseType type;
         //replacing with Category class
 
-
     @ManyToOne
     private Category category;
 
@@ -79,6 +78,11 @@ public class Cheese {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return "CHEESE " + name;
     }
 
 }

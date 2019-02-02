@@ -21,7 +21,7 @@ public class Menu {
     private String name;
 
     @ManyToMany
-    private List<Cheese> cheeses = new ArrayList<>();
+    private List<Cheese> cheeses;
 
     public int getId() {
         return id;
@@ -46,9 +46,22 @@ public class Menu {
         this.name = name;
     }
 
+    public List<Cheese> getCheeses() {
+        return cheeses;
+    }
+
+    public void setCheeses(List<Cheese> cheeses) {
+        this.cheeses = cheeses;
+    }
+
     //method to add items to menu
     public void addItem(Cheese item) {
         cheeses.add(item);
+    }
+
+    @Override
+    public String toString() {
+        return "MENU-ID: " + id + " CHEESES: " + cheeses;
     }
 
 }
