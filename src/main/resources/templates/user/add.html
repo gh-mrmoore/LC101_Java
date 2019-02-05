@@ -10,20 +10,28 @@
     <label th:for="username">User Name:</label>
         <input th:field="*{username}" />
         <span th:errors="*{username}" class="error"></span>
+    <br />
+    <br />
 
 
     <label th:for="email">Email:</label>
-        <input th:field="*{email}" />
+        <input type="email" th:field="*{email}" />
         <span th:errors="*{email}" class="error"></span>
+    <br />
+    <br />
 
 
     <label th:for="password">Password:</label>
-        <input th:field="*{password}" />
+        <input type="password" th:field="*{password}" />
         <span th:errors="*{password}" class="error"></span>
+    <br />
+    <br />
 
     <label th:for="verify">Verify Password:</label>
-        <input th:field="*{verify}" />
+        <input type="password" th:field="*{verify}" />
         <span th:errors="*{verify}" class="error"></span>
+    <br />
+    <br />
 
 
     <input type="submit" value="Add User" />

@@ -1,6 +1,8 @@
 package org.launchcode.controllers;
 
 import org.launchcode.models.User;
+import org.launchcode.models.data.UserDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -15,9 +17,15 @@ import javax.validation.Valid;
 @RequestMapping("user")
 public class UserController {
 
+    @Autowired
+    private UserDao usersDao;
+
     @RequestMapping(value = "")
     public String index(Model model) {
+
+
         model.addAttribute("title", "User Sign-In for Cheese");
+        model.addAttribute("users", usersDao.findAll());
 
         return"user/index";
     }
@@ -33,26 +41,26 @@ public class UserController {
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddForm(Model model,
                                  @ModelAttribute @Valid User user,
-                                 Errors errors,
-                                 @RequestParam String verify) {
+                                 Errors errors) {
         model.addAttribute("title", "Process New User Input");
 
         String password = user.getPassword();
+        String verify = user.getVerify();
+
         if (errors.hasErrors()) {
-            User fixUser = new User();
-            model.addAttribute("user", fixUser);
-            model.addAttribute("errors", errors);
+            //User fixUser = new User();
             model.addAttribute("title", "Fix errors in form input");
-            System.out.println("ERRORS");
-            System.out.println(errors);
+            model.addAttribute("errors", errors);
+            model.addAttribute("user", user);
             return "user/add";
         } else if (password.equals(verify) == false) {
-            User userFixit = new User();
-            model.addAttribute("user", userFixit);
+            //User fixUser = new User();
             model.addAttribute("title", "Passwords did not match");
-            System.out.println("PASSWORD");
+            model.addAttribute("errors", errors);
+            model.addAttribute("user", user);
             return "user/add";
         } else {
+            usersDao.save(user);
             model.addAttribute("title", "Welcome New User!");
             model.addAttribute("user", user.getUsername());
             System.out.println("OK");
