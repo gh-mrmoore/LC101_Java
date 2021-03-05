@@ -18,3 +18,11 @@ This repository is the re-organization of code created between 2018-12-03 and 20
 | 3.12 | 2019-01-28 |
 | 3.13 | 2019-01-31 |
 | 3.14 | 2019-02-04 |
+
+## Assignments
+| Assignment | Date |
+| ----- | ----- |
+| TechJobs-Console | 2018-12-13 |
+| TechJobs MVC | 2019-01-10 |
+| TechJobs - OO | 2019-01-24 |
+| Cheese MVC - Persistent | 2019-02-04 |
