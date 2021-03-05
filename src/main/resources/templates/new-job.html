@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body>
+
+<div th:replace="fragments :: page-header"></div>
+
+<div class="container body-content">
+
+    <form th:object="${jobForm}" method="post" action="">
+
+        <div class="form-group">
+            <label th:for="name">Position Title (Name)</label>
+            <input th:field="*{name}" />
+            <span th:errors="*{name}" class="error"></span>
+        </div>
+
+        <div class="form-group">
+            <label th:for="employerId">Employer</label>
+            <select th:field="*{employerId}">
+                <option th:each="employer : *{employers}"
+                        th:value="${employer.id}"
+                        th:text="${employer.value}"></option>
+            </select>
+            <span th:errors="*{employers}" class="error"></span>
+
+        </div>
+
+        <!-- TODO #5 - Create <select> dropdowns for other job fields -->
+        <!-- DONE -->
+        <div class="form-group">
+            <label th:for="locationID">Location</label>
+            <select th:field="*{locationID}">
+                <option th:each="location : *{locations}"
+                        th:value="${location.id}"
+                        th:text="${location.value}"></option>
+            </select>
+            <span th:errors="*{locations}" class="error"></span>
+
+        </div>
+
+        <div class="form-group">
+            <label th:for="positionID">Position Type</label>
+            <select th:field="*{positionID}">
+                <option th:each="postype : *{positionTypes}"
+                        th:value="${postype.id}"
+                        th:text="${postype.value}"></option>
+            </select>
+            <span th:errors="*{positionTypes}" class="error"></span>
+
+        </div>
+
+        <div class="form-group">
+            <label th:for="skillID">Skill (aka Core Competency)</label>
+            <select th:field="*{skillID}">
+                <option th:each="competency : *{coreCompetencies}"
+                        th:value="${competency.id}"
+                        th:text="${competency.value}"></option>
+            </select>
+            <span th:errors="*{coreCompetencies}" class="error"></span>
+
+        </div>
+
+        <input type="submit" value="Add Job" />
+    </form>
+
+</div>
+
+</body>
+</html>
